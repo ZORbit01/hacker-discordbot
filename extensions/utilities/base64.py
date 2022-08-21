@@ -1,7 +1,7 @@
 import hikari
 import lightbulb
 import base64
-
+from utils.const import VERIFIED_ROLE_ID
 base64_plugin = lightbulb.Plugin("base64", "Base64 Conversion tool")
 
 
@@ -33,25 +33,26 @@ def decode(value: str):
 @lightbulb.option(
     "mode", "the conversion", str, required=True, choices=["encode", "decode"]
 )
+@lightbulb.add_checks(lightbulb.has_roles(VERIFIED_ROLE_ID))
 @lightbulb.command("base64", "to decode or encode a base64 value", pass_options=True)
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def b64(ctx: lightbulb.Context, mode: str, input: str) -> None:
     try:
         if mode == "decode":
-            direction = "Base64 � ASCII"
+            direction = "Base64 ASCII"
             final = decode(input)
         else:
-            direction = "Base64 � ASCII"
+            direction = "Base64 ASCII"
             final = encode(input)
         await ctx.respond(
             embed=hikari.Embed(
                 title=f"{direction} Conversion:", description=f"```{final}```"
             )
         )
-    except UnicodeEncodeError:
+    except Exception:
         await ctx.respond(
             embed=hikari.Embed(
-                description=f"⚠️ Unable to decode the text, possible unsupported characters are found."
+                description=f"⚠️ Unable to decode the text,"
             )
         )
 

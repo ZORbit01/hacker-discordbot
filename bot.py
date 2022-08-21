@@ -2,34 +2,44 @@ import os
 
 import hikari
 import lightbulb
-
+from tortoise import run_async
 from utils.const import GUILDS, INTENTS, TOKEN, PREFIX
 from lightbulb.ext import tasks
 import aiohttp
 import concurrent.futures
 import miru
 from hikari.permissions import Permissions
-
+from database.config import TORTOISE_ORM
+from tortoise import run_async,Tortoise
 bot = lightbulb.BotApp(
     TOKEN,
     default_enabled_guilds=GUILDS,
     prefix=PREFIX,
+    intents=INTENTS,
+        
 )
 
 miru.load(bot)
 tasks.load(bot)
 
 
+    
+
 @bot.listen()
 async def on_starting(event: hikari.StartingEvent) -> None:
-    """when bot start"""
+    """when bot # from database.config import TORTOISE_ORM"""
+
     bot.d.aio_session = aiohttp.ClientSession()
     bot.d.process_pool = concurrent.futures.ProcessPoolExecutor()
+    await Tortoise.init(
+             config=TORTOISE_ORM
+           )
 
 
 @bot.listen()
 async def on_stopping(event: hikari.StoppingEvent) -> None:
     """trigger when bot shutdown"""
+    await Tortoise.close_connections()
     await bot.d.aio_session.close()
     bot.d.process_pool.shutdown(wait=True)
 
@@ -58,6 +68,5 @@ async def on_error(event):
         raise event.exception
 
         # return True
-
 
 bot.run()

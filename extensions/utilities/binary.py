@@ -1,5 +1,5 @@
 import lightbulb
-
+from utils.const import VERIFIED_ROLE_ID
 binary_plugin = lightbulb.Plugin("binary", "Binary Digit conversion tool")
 
 
@@ -29,6 +29,7 @@ def encode(value: str):
     required=True,
     choices=["encode", "decode"],
 )
+@lightbulb.add_checks(lightbulb.has_roles(VERIFIED_ROLE_ID))
 @lightbulb.command("binary", "convert binary to ascii", pass_options=True)
 @lightbulb.implements(lightbulb.SlashCommand, lightbulb.PrefixCommand)
 async def binary(ctx: lightbulb.Context, mode: str, value: str):

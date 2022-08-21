@@ -9,11 +9,9 @@ say_plugin.add_checks(
     lightbulb.checks.has_guild_permissions(hikari.Permissions.MANAGE_MESSAGES),
     lightbulb.checks.bot_has_guild_permissions(hikari.Permissions.MANAGE_MESSAGES),
     lightbulb.guild_only,
-
 )
 
 MANAGE_MESSAGES = Permissions.MANAGE_CHANNELS
-
 
 
 @say_plugin.command()

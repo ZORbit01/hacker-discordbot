@@ -9,14 +9,9 @@ purge_plugin.add_checks(
     lightbulb.checks.has_guild_permissions(hikari.Permissions.MANAGE_MESSAGES),
     lightbulb.checks.bot_has_guild_permissions(hikari.Permissions.MANAGE_MESSAGES),
     lightbulb.guild_only,
-
 )
 
 DELETE_MESSAGES = Permissions.MANAGE_MESSAGES
-
-
-
-
 
 
 @purge_plugin.command()
@@ -40,14 +35,14 @@ async def purge(
     bulk_delete_limit = datetime.datetime.now(
         datetime.timezone.utc
     ) - datetime.timedelta(days=14)
-    if user is not None  :
+    if user is not None:
         iterator = (
             ctx.bot.rest.fetch_messages(channel)
             .filter(lambda message: message.author.id == user.id)
             .limit(count)
             .take_while(lambda message: message.created_at > bulk_delete_limit)
         )
-    else :
+    else:
         iterator = (
             ctx.bot.rest.fetch_messages(channel)
             .limit(count)

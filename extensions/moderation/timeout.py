@@ -8,7 +8,6 @@ timeout_plugin.add_checks(
     lightbulb.checks.has_guild_permissions(hikari.Permissions.MODERATE_MEMBERS),
     lightbulb.checks.bot_has_guild_permissions(hikari.Permissions.MODERATE_MEMBERS),
     lightbulb.guild_only,
-
 )
 TIMEOUT_PERMISSIONS = Permissions.MODERATE_MEMBERS
 
@@ -38,6 +37,7 @@ TIMEOUT_PERMISSIONS = Permissions.MODERATE_MEMBERS
     "user", "the user you want to be put in timeout", hikari.Member, required=True
 )
 # @lightbulb.add_checks(lightbulb.checks.has_role_permissions(TIMEOUT_PERMISSIONS))
+
 
 @lightbulb.app_command_permissions(TIMEOUT_PERMISSIONS, dm_enabled=False)
 @lightbulb.command("timeout", "Timeout a member", pass_options=True)

@@ -1,4 +1,5 @@
 import lightbulb
+from utils.const import VERIFIED_ROLE_ID
 
 hex_plugin = lightbulb.Plugin("hexadecimal", "68 65 78")
 
@@ -25,6 +26,7 @@ def encode(value: str):
 @lightbulb.option(
     "mode", "the mode of operation", str, required=True, choices=["encode", "decode"]
 )
+@lightbulb.add_checks(lightbulb.has_roles(VERIFIED_ROLE_ID))
 @lightbulb.command("hex", "convert hex to ascii or vice versa", pass_options=True)
 @lightbulb.implements(lightbulb.SlashCommand, lightbulb.PrefixCommand)
 async def hexadecimal(ctx: lightbulb.Context, mode: str, value: str):

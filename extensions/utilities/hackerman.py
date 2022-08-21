@@ -2,12 +2,13 @@ import lightbulb
 from random import random
 from math import floor
 from utils.quotes import jargonConstructs, jargonWordPool
-
+from utils.const import VERIFIED_ROLE_ID
 hack_plugin = lightbulb.Plugin("hackerman", "HAAAAAAAAAAAAAAAX")
 
 
 @hack_plugin.command()
 @lightbulb.add_cooldown(3, 3, lightbulb.UserBucket)
+@lightbulb.add_checks(lightbulb.has_roles(VERIFIED_ROLE_ID))
 @lightbulb.command("hackerman", "l33t h4x000r!11", aliases=["hack"])
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def hackerman(ctx: lightbulb.Context):

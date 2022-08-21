@@ -1,6 +1,6 @@
 import hikari
 import lightbulb
-
+from utils.const import VERIFIED_ROLE_ID
 morseAlphabet = {
     "A": ".-",
     "B": "-...",
@@ -83,6 +83,7 @@ def decode(value: str):
 @lightbulb.option(
     "mode", "the conversion mode", str, required=True, choices=["encode", "decode"]
 )
+@lightbulb.add_checks(lightbulb.has_roles(VERIFIED_ROLE_ID))
 @lightbulb.command("morse", "to encode or decode morse code", pass_options=True)
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def morse(ctx: lightbulb.Context, mode: str, input: str) -> None:
