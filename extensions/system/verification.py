@@ -49,7 +49,7 @@ async def put_in_verification_room(event):
                 user=user,
                 verification_flag=flag,
             ).save()
-        encrypted_flag = encrypt_flag(flag.verification_flag)
+        encrypted_flag = encrypt_flag(flag)
 
     else:
         print("user not exist")
