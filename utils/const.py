@@ -1,6 +1,5 @@
 import os
 import hikari
-from dotenv import load_dotenv
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 
