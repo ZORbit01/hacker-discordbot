@@ -1,26 +1,19 @@
-from database.local_conf import (
-    host,
-    database,
-    port,
-    password,
-    user,
-)
+try :
+    from database.local_conf import (
+        host,
+        database,
+        port,
+        password,
+        user,
+    )
+except :
+    pass
+import os
 
 TORTOISE_ORM = {
     "connections": {
         # Dict format for connection
-        "default": {
-            "engine": "tortoise.backends.asyncpg",
-            "credentials": {
-                "host": host,
-                "port": port,
-                "user": user,
-                "password": password,
-                "database": database,
-            },
-        },
-        # Using a DB_URL string
-        "default": f"postgres://{user}:{password}@{host}:{port}/{database}",
+        "default": os.getenv("DATABASE_URL",f"postgres://{user}:{password}@{host}:{port}/{database}"),
     },
     "apps": {
         "database": {
