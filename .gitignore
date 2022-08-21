@@ -130,3 +130,5 @@ dmypy.json
 
 
 database/local_conf.py
+.vim/*
+.vim
