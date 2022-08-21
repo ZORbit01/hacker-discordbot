@@ -41,7 +41,7 @@ async def put_in_verification_room(event):
         print("user exists")
         searched_user = await User.get(discord_id=user.discord_id)
         if await VerificationRoom.exists(user=searched_user):
-            room =VerificationRoom.get(user=searched_user)
+            room =await VerificationRoom.get(user=searched_user)
             flag = room.verification_flag
         else :
             flag = flag_game_generator(user.username)

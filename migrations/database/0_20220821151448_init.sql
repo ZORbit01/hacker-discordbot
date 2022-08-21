@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS "member" (
     "discord_id" BIGINT NOT NULL UNIQUE,
     "username" VARCHAR(255) NOT NULL,
     "is_bot" BOOL NOT NULL  DEFAULT False,
-    "created_at" TIMESTAMPTZ NOT NULL,
-    "avatar_url" VARCHAR(255) NOT NULL,
+    "created_at" TIMESTAMPTZ,
+    "avatar_url" VARCHAR(255),
     "joined_at" TIMESTAMPTZ NOT NULL
 );
 CREATE TABLE IF NOT EXISTS "user" (
@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS "user" (
     "discord_id" BIGINT NOT NULL UNIQUE,
     "username" VARCHAR(255) NOT NULL,
     "is_bot" BOOL NOT NULL  DEFAULT False,
-    "created_at" TIMESTAMPTZ NOT NULL,
-    "avatar_url" VARCHAR(255) NOT NULL
+    "created_at" TIMESTAMPTZ,
+    "avatar_url" VARCHAR(255)
 );
 CREATE TABLE IF NOT EXISTS "verificationroom" (
     "id" SERIAL NOT NULL PRIMARY KEY,
