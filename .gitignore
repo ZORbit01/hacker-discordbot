@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+database/local_conf.py
+.vim/*
+.vim
