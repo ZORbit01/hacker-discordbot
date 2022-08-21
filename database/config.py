@@ -1,19 +1,9 @@
-try :
-    from database.local_conf import (
-        host,
-        database,
-        port,
-        password,
-        user,
-    )
-except :
-    pass
 import os
 
 TORTOISE_ORM = {
     "connections": {
         # Dict format for connection
-        "default": os.getenv("DATABASE_URL",f"postgres://{user}:{password}@{host}:{port}/{database}"),
+        "default": os.getenv("DATABASE_URL")
     },
     "apps": {
         "database": {
