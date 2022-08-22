@@ -38,7 +38,6 @@ async def put_in_verification_room(event):
     )
 
     if await User.exists(discord_id=user.discord_id):
-        print("user exists")
         searched_user = await User.get(discord_id=user.discord_id)
         if await VerificationRoom.exists(user=searched_user):
             room =await VerificationRoom.get(user=searched_user)
@@ -52,7 +51,6 @@ async def put_in_verification_room(event):
         encrypted_flag = encrypt_flag(flag)
 
     else:
-        print("user not exist")
         await user.save()
 
         # put in verfication room
@@ -70,7 +68,7 @@ async def put_in_verification_room(event):
         VERIFICATION_ROOM_ID,
         "Hello! "
         + discord_user.mention
-        + " decode this message in order to verify you self:\n```"
+        + " decypt this message in order to verify your self:\n```"
         + encrypted_flag
         + "``` \n put the flag as parameter in ``/verify some_text{flag}``",
         user_mentions=[user.discord_id],
@@ -87,7 +85,6 @@ async def put_in_verification_room(event):
 @lightbulb.command("verify", "verify your self", pass_options=True)
 @lightbulb.implements(lightbulb.SlashCommand)
 async def verify(ctx:lightbulb.Context,flag:str):
-    print(flag)
     discord_user = ctx.member
     if ctx.channel_id != VERIFICATION_ROOM_ID:
         return
