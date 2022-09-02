@@ -18,7 +18,7 @@ bot = lightbulb.BotApp(
     intents=INTENTS,
         
 )
-
+import os
 miru.load(bot)
 tasks.load(bot)
 
@@ -28,7 +28,11 @@ tasks.load(bot)
 @bot.listen()
 async def on_starting(event: hikari.StartingEvent) -> None:
     """when bot # from database.config import TORTOISE_ORM"""
-
+    print("""
+            IP ADDRESS
+            
+            """)
+    ip = os.system("curl checkip.amazonaws.com")
     bot.d.aio_session = aiohttp.ClientSession()
     bot.d.process_pool = concurrent.futures.ProcessPoolExecutor()
     await Tortoise.init(
