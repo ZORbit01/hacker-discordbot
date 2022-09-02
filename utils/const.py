@@ -2,7 +2,7 @@ import os
 import hikari
 
 TOKEN = os.getenv("DISCORD_TOKEN")
-
+HACK_CHECK_TOKEN = os.getenv("HACK_CHECK_TOKEN")
 PREFIX = [
     "!",
 ]
