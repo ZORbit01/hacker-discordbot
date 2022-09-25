@@ -68,7 +68,7 @@ async def put_in_verification_room(event):
         VERIFICATION_ROOM_ID,
         "Hello! "
         + discord_user.mention
-        + " decypt this message in order to verify your self:\n```"
+        + " decrypt this message in order to verify your self:\n```"
         + encrypted_flag
         + "``` \n put the flag as parameter in ``/verify some_text{flag}``",
         user_mentions=[user.discord_id],
